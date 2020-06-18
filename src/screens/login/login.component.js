@@ -12,23 +12,23 @@ import { showAlert } from '../../redux/actions';
 
 import styles from './styles';
 
-const onSignInPressed = async ({ email, password }, setIsLoading, dispatch) => {
-  setIsLoading(true);
-
-  try {
-    const authService = new AuthService();
-    await authService.signIn(email, password, dispatch);
-  } catch (error) {
-    dispatch(showAlert('Oops!', error.message));
-  }
-  setIsLoading(false);
-};
-
-const onSignUpPressed = (navigation) => navigation.goBack();
-
 const LoginScreen = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
+
+  const onSignInPressed = async ({ email, password }) => {
+    setIsLoading(true);
+
+    try {
+      const authService = new AuthService();
+      await authService.signIn(email, password, dispatch);
+    } catch (error) {
+      dispatch(showAlert('Oops!', error.message));
+    }
+    setIsLoading(false);
+  };
+
+  const onSignUpPressed = () => navigation.goBack();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -37,11 +37,9 @@ const LoginScreen = ({ navigation }) => {
         <AuthForm
           isLoading={isLoading}
           submitTitle="Sign In"
-          onSubmit={(formData) =>
-            onSignInPressed(formData, setIsLoading, dispatch)
-          }
+          onSubmit={onSignInPressed}
         />
-        <TouchableOpacity onPress={() => onSignUpPressed(navigation)}>
+        <TouchableOpacity onPress={onSignUpPressed}>
           <Text category="p1" appearance="hint" style={styles.loginText}>
             Need an account?{' '}
             <Text category="s1" appearance="hint">
