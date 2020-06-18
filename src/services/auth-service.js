@@ -26,7 +26,7 @@ class AuthService {
   };
 
   signIn = async (email, password, dispatch) => {
-    const data = await authApi.signIn(email, password);
+    const data = await authApi.signIn(email.trim(), password.trim());
     this.setUser(data, dispatch);
   };
 
@@ -34,6 +34,16 @@ class AuthService {
     authApi.signOut();
     dispatch(clearCurrentUser());
     AsyncStorage.removeItem(STORED_USER_KEY);
+  };
+
+  loadUserFromStorage = async (dispatch) => {
+    const json = await AsyncStorage.getItem(STORED_USER_KEY);
+    if (json) {
+      const data = JSON.parse(json);
+      dispatch(setCurrentUser(data));
+    } else {
+      dispatch(clearCurrentUser());
+    }
   };
 
   // Helpers

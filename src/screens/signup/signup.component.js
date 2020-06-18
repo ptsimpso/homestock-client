@@ -23,7 +23,6 @@ const onSignUpPressed = async (
     const authService = new AuthService();
     await authService.signUp(name, email, password, dispatch);
   } catch (error) {
-    // TODO: Figure out why alert is not showing
     dispatch(showAlert('Oops!', error.message));
   }
   setIsLoading(false);
