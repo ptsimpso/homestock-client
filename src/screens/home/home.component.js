@@ -1,19 +1,17 @@
 import React from 'react';
-import { SafeAreaView } from 'react-native';
-import { Divider, TopNavigation, Text, Button } from '@ui-kitten/components';
-import { useSelector, useDispatch } from 'react-redux';
+import { View } from 'react-native';
+import { Layout } from '@ui-kitten/components';
 
-import AuthService from '../../services/auth-service';
+import Header from '../../components/general/header/header.component';
+import { MENU_ACTION } from '../../utils/constants'
+
+import styles from './styles';
 
 const HomeScreen = ({ navigation }) => {
-  const auth = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
-
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
-      <TopNavigation title="Home Screen" alignment="center" />
-      <Divider />
-    </SafeAreaView>
+    <View style={styles.container}>
+      <Header title="Home" leftAction={MENU_ACTION} />
+    </View>
   );
 };
 
