@@ -16,15 +16,25 @@ const ProfileScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Header leftAction={MENU_ACTION} title="Profile" />
-      <Text>User name: {auth.currentUser.name}</Text>
-      <Button
-        onPress={() => {
-          const authService = new AuthService();
-          authService.signOut(dispatch);
-        }}
-      >
-        Log Out
-      </Button>
+      <View style={styles.content}>
+        <Text category="label" style={styles.label}>
+          Name
+        </Text>
+        <Text>{auth.currentUser.name}</Text>
+        <Text category="label" style={styles.label}>
+          Email
+        </Text>
+        <Text>{auth.currentUser.email}</Text>
+        <Button
+          onPress={() => {
+            const authService = new AuthService();
+            authService.signOut(dispatch);
+          }}
+          style={styles.logOutButton}
+        >
+          Log Out
+        </Button>
+      </View>
     </View>
   );
 };

@@ -1,7 +1,7 @@
 import { SET_CURRENT_USER } from '../actions/types';
 
 const INITIAL_STATE = {
-  currentUser: null,
+  currentUser: null, // props: _id, name, email
   token: null,
 };
 
