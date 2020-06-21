@@ -8,6 +8,9 @@ import SignUpScreen from '../screens/signup/signup.component';
 import LoginScreen from '../screens/login/login.component';
 import HomeScreen from '../screens/home/home.component';
 import ProfileScreen from '../screens/profile/profile.component';
+import CreateHomeScreen from '../screens/create-home/create-home.component';
+
+import SideMenu from '../components/general/side-menu/side-menu.component';
 
 // **********
 // ROOT STACK
@@ -38,17 +41,26 @@ const RootNavigator = (props) => (
 // MAIN
 // ****
 const Drawer = createDrawerNavigator();
-const MainNavigator = (props) => (
-  <Drawer.Navigator initialRouteName="Home">
+const MainNavigator = () => (
+  <Drawer.Navigator
+    initialRouteName="Home"
+    drawerContent={(navProps) => <SideMenu {...navProps} />}
+  >
     <Drawer.Screen name="Profile" component={ProfileScreen} />
-    <Drawer.Screen name="Home" component={HomeScreen} />
+    <Drawer.Screen name="Home" component={HomeNavigator} />
+    <Drawer.Screen name="CreateHome" component={CreateHomeScreen} />
   </Drawer.Navigator>
 );
 
 // **********
 // HOME STACK
 // **********
-// TODO
+const HomeStack = createStackNavigator();
+const HomeNavigator = () => (
+  <HomeStack.Navigator headerMode="none">
+    <HomeStack.Screen name="HomeMain" component={HomeScreen} />
+  </HomeStack.Navigator>
+);
 
 export const NavigationStack = () => {
   const auth = useSelector((state) => state.auth);
