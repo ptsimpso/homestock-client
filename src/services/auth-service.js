@@ -38,12 +38,16 @@ class AuthService {
 
   loadUserFromStorage = async (dispatch) => {
     const json = await AsyncStorage.getItem(STORED_USER_KEY);
+    let isLoggedIn;
     if (json) {
       const data = JSON.parse(json);
       dispatch(setCurrentUser(data));
+      isLoggedIn = true;
     } else {
       dispatch(clearCurrentUser());
+      isLoggedIn = false;
     }
+    return isLoggedIn;
   };
 
   // Helpers

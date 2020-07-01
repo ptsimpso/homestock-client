@@ -4,6 +4,7 @@ import { Icon, useTheme } from '@ui-kitten/components';
 import { useDispatch } from 'react-redux';
 
 import AuthService from '../../services/auth-service';
+import HomeService from '../../services/home-service';
 
 import styles from './styles';
 
@@ -12,8 +13,12 @@ const LoadingScreen = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const authService = new AuthService();
-    authService.loadUserFromStorage(dispatch);
+    const launchPrep = async () => {
+      const authService = new AuthService();
+      authService.loadUserFromStorage(dispatch);
+    }
+
+    launchPrep()
   }, [dispatch]);
 
   return (

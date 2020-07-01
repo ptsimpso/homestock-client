@@ -1,4 +1,4 @@
-import { SET_ALERT } from '../actions/types';
+import { SET_ALERT } from './types';
 
 export const showAlert = (
   title,
@@ -10,7 +10,7 @@ export const showAlert = (
   return {
     type: SET_ALERT,
     payload: {
-      isVisible: true,
+      isVisible: true, 
       title,
       text,
       actionText,
