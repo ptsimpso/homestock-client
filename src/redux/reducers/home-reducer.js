@@ -15,15 +15,16 @@ export default (state = INITIAL_STATE, action) => {
     case SET_HOMES:
       const homes = action.payload;
       let selectedHome;
+      
+      if (state.selectedHome) {
+        const updatedSelectedHome = homes.find(
+          (home) => home._id === state.selectedHome._id
+        );
 
-      const updatedSelectedHome = homes.find(
-        (home) => home._id === state.selectedHome._id
-      );
-      if (updatedSelectedHome) {
-        selectedHome = updatedSelectedHome;
-      } else if (homes.length > 0) {
-        selectedHome = homes[0];
+        if (updatedSelectedHome) selectedHome = updatedSelectedHome;
       }
+
+      if (!selectedHome) selectedHome = homes[0];
 
       return {
         all: homes,

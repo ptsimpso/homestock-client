@@ -10,7 +10,7 @@ import {
 
 import stylesheet from './styles';
 
-const NavOption = ({ title, iconName, onPress }) => {
+const NavOption = ({ title, iconName, onPress, children }) => {
   const styles = useStyleSheet(stylesheet);
   const theme = useTheme();
 
@@ -26,6 +26,7 @@ const NavOption = ({ title, iconName, onPress }) => {
           {title}
         </Text>
       </TouchableOpacity>
+      {children}
       <Divider />
     </>
   );

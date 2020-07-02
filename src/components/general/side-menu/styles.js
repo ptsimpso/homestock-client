@@ -20,4 +20,16 @@ export default StyleService.create({
   navText: {
     marginLeft: 10,
   },
+  homeOptionsContainer: {
+    marginBottom: 20,
+    marginLeft: 70,
+  },
+  homeOption: {
+    paddingVertical: 10,
+    marginBottom: 10,
+    justifyContent: 'center',
+  },
+  homeOptionText: {
+
+  }
 });

@@ -8,6 +8,7 @@ import LogoContainer from '../../components/auth/logo-container/logo-container.c
 import AuthForm from '../../components/auth/auth-form/auth-form.component';
 
 import AuthService from '../../services/auth-service';
+import HomeService from '../../services/home-service';
 import { showAlert } from '../../redux/actions';
 
 import styles from './styles';
@@ -25,6 +26,14 @@ const LoginScreen = ({ navigation }) => {
     } catch (error) {
       dispatch(showAlert('Oops!', error.message));
     }
+
+    try {
+      const homeService = new HomeService();
+      homeService.fetchHomes(dispatch);
+    } catch (error) {
+      dispatch(showAlert('Oops!', 'Something went wrong fetching your homes. Please close the app and try again.'));
+    }
+
     setIsLoading(false);
   };
 

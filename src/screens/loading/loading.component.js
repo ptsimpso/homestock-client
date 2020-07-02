@@ -13,12 +13,17 @@ const LoadingScreen = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const launchPrep = async () => {
+    const performInitialLaunchPrep = async () => {
       const authService = new AuthService();
-      authService.loadUserFromStorage(dispatch);
+      const isLoggedIn = await authService.loadUserFromStorage(dispatch);
+
+      if (isLoggedIn) {
+        const homeService = new HomeService();
+        homeService.fetchHomes(dispatch);
+      }
     }
 
-    launchPrep()
+    performInitialLaunchPrep()
   }, [dispatch]);
 
   return (

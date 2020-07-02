@@ -1,8 +1,13 @@
-import { StyleSheet } from 'react-native';
+import { StyleService } from '@ui-kitten/components';
 
-export default StyleSheet.create({
+export default StyleService.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
   },
+  loadingContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
 });

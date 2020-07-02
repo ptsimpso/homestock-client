@@ -1,19 +1,20 @@
 import React from 'react';
-import { ScrollView, SafeAreaView, TouchableOpacity } from 'react-native';
+import { ScrollView, SafeAreaView, TouchableOpacity, View, } from 'react-native';
 import {
-  Icon,
-  Divider,
   Text,
   useStyleSheet,
-  useTheme,
 } from '@ui-kitten/components';
+import { useDispatch, useSelector } from 'react-redux';
+
+import HomeService from '../../../services/home-service';
 
 import NavOption from './nav-option/nav-option.component';
 import stylesheet from './styles';
 
 const SideMenu = ({ navigation }) => {
   const styles = useStyleSheet(stylesheet);
-  const theme = useTheme();
+  const homes = useSelector((state) => state.homes);
+  const dispatch = useDispatch();
 
   const onProfilePress = () => {
     navigation.navigate('Profile');
@@ -26,11 +27,48 @@ const SideMenu = ({ navigation }) => {
   };
 
   const onJoinHomePress = () => {
+    // TODO: Join home
     navigation.closeDrawer();
   };
 
+  const onAllHomesPress = () => {
+    navToHome();
+  }
+
+  const onHomeOptionPress = (home) => {
+    const homeService = new HomeService();
+    homeService.selectHome(home, dispatch);
+    navToHome();
+  }
+
+  const navToHome = () => {
+    navigation.navigate('HomeMain');
+    navigation.closeDrawer();
+  }
+
   const renderHomes = () => {
-    // TODO: User reducer. If homes exist, render them
+    if (homes.all && homes.all.length > 0) {
+      return (
+        <NavOption
+          title="Your Homes"
+          iconName="home-outline"
+          onPress={onAllHomesPress}
+        >
+          <View style={styles.homeOptionsContainer}>
+            {
+              homes.all.map((home) => {
+                return (
+                  <TouchableOpacity style={styles.homeOption} key={home._id} onPress={() => onHomeOptionPress(home)}>
+                    <Text style={styles.homeOptionText} category="s1">{home.name}</Text>
+                  </TouchableOpacity>
+                );
+              })
+            }
+          </View>
+        </NavOption>
+      );
+    }
+
     return null;
   };
 
