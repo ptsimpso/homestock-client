@@ -2,9 +2,14 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 import { STORED_SELECTED_HOME_KEY } from '../utils/constants';
 import homeApi from '../api/home';
-import { setHomes, joinHome, selectHome, updateHome } from '../redux/actions';
+import {
+  setHomes,
+  joinHome,
+  selectHome,
+  updateHome,
+  clearHomeData,
+} from '../redux/actions';
 import store from '../redux/store';
-import home from '../api/home';
 
 class HomeService {
   constructor() {}
@@ -12,6 +17,16 @@ class HomeService {
   fetchHomes = async (dispatch) => {
     const data = await homeApi.fetchHomes();
     dispatch(setHomes(data));
+  };
+
+  createHome = async (name, joinCode, dispatch) => {
+    if (!name || name === '' || !joinCode || joinCode === '') {
+      throw new Error('Please provide a name and join code.');
+    }
+
+    const home = await homeApi.createHome(name, joinCode);
+    dispatch(joinHome(home));
+    this.saveSelectedHome(home._id);
   };
 
   joinHome = async (joinCode, dispatch) => {
@@ -31,7 +46,11 @@ class HomeService {
 
   updateHome = async (updatedHome, dispatch) => {
     dispatch(updateHome(updatedHome));
-  }
+  };
+
+  clearHomeData = (dispatch) => {
+    dispatch(clearHomeData());
+  };
 
   loadSelectedHomeFromStorage = async (dispatch) => {
     const id = await AsyncStorage.getItem(STORED_SELECTED_HOME_KEY);
@@ -49,7 +68,9 @@ class HomeService {
           }
         }
 
-        if (selectedHome) dispatch(selectHome(data));
+        if (selectedHome) {
+          dispatch(selectHome(selectedHome));
+        }
       }
     }
   };
@@ -57,8 +78,7 @@ class HomeService {
   // Helpers
   saveSelectedHome = (id) => {
     AsyncStorage.setItem(STORED_SELECTED_HOME_KEY, id);
-  }
-
+  };
 }
 
 export default HomeService;

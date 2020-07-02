@@ -3,6 +3,7 @@ import {
   SELECT_HOME,
   JOIN_HOME,
   UPDATE_HOME,
+  CLEAR_HOME_DATA,
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -15,16 +16,20 @@ export default (state = INITIAL_STATE, action) => {
     case SET_HOMES:
       const homes = action.payload;
       let selectedHome;
-      
+
       if (state.selectedHome) {
         const updatedSelectedHome = homes.find(
           (home) => home._id === state.selectedHome._id
         );
 
-        if (updatedSelectedHome) selectedHome = updatedSelectedHome;
+        if (updatedSelectedHome) {
+          selectedHome = updatedSelectedHome;
+        }
       }
 
-      if (!selectedHome) selectedHome = homes[0];
+      if (!selectedHome) {
+        selectedHome = homes[0];
+      }
 
       return {
         all: homes,
@@ -39,7 +44,7 @@ export default (state = INITIAL_STATE, action) => {
       const newHome = action.payload;
 
       return {
-        all: state.all ? state.all.push(newHome) : [newHome],
+        all: state.all ? [...state.all, newHome] : [newHome],
         selectedHome: newHome,
       };
     case UPDATE_HOME:
@@ -61,6 +66,11 @@ export default (state = INITIAL_STATE, action) => {
       return {
         all,
         newSelectedHome,
+      };
+    case CLEAR_HOME_DATA:
+      return {
+        all: [],
+        newSelectedHome: null,
       };
     default:
       return state;

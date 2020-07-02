@@ -1,9 +1,6 @@
 import React from 'react';
-import { ScrollView, SafeAreaView, TouchableOpacity, View, } from 'react-native';
-import {
-  Text,
-  useStyleSheet,
-} from '@ui-kitten/components';
+import { ScrollView, SafeAreaView, TouchableOpacity, View } from 'react-native';
+import { Text, useStyleSheet } from '@ui-kitten/components';
 import { useDispatch, useSelector } from 'react-redux';
 
 import HomeService from '../../../services/home-service';
@@ -27,24 +24,24 @@ const SideMenu = ({ navigation }) => {
   };
 
   const onJoinHomePress = () => {
-    // TODO: Join home
+    navigation.navigate('JoinHome');
     navigation.closeDrawer();
   };
 
   const onAllHomesPress = () => {
     navToHome();
-  }
+  };
 
   const onHomeOptionPress = (home) => {
     const homeService = new HomeService();
     homeService.selectHome(home, dispatch);
     navToHome();
-  }
+  };
 
   const navToHome = () => {
     navigation.navigate('HomeMain');
     navigation.closeDrawer();
-  }
+  };
 
   const renderHomes = () => {
     if (homes.all && homes.all.length > 0) {
@@ -55,15 +52,19 @@ const SideMenu = ({ navigation }) => {
           onPress={onAllHomesPress}
         >
           <View style={styles.homeOptionsContainer}>
-            {
-              homes.all.map((home) => {
-                return (
-                  <TouchableOpacity style={styles.homeOption} key={home._id} onPress={() => onHomeOptionPress(home)}>
-                    <Text style={styles.homeOptionText} category="s1">{home.name}</Text>
-                  </TouchableOpacity>
-                );
-              })
-            }
+            {homes.all.map((home) => {
+              return (
+                <TouchableOpacity
+                  style={styles.homeOption}
+                  key={home._id}
+                  onPress={() => onHomeOptionPress(home)}
+                >
+                  <Text style={styles.homeOptionText} category="s1">
+                    {home.name}
+                  </Text>
+                </TouchableOpacity>
+              );
+            })}
           </View>
         </NavOption>
       );

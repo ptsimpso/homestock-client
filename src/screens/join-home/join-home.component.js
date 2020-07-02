@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { Input, Button, Spinner, Text } from '@ui-kitten/components';
-import Clipboard from '@react-native-community/clipboard';
+import { Input, Button, Spinner } from '@ui-kitten/components';
 import { useDispatch } from 'react-redux';
 
 import HomeService from '../../services/home-service';
@@ -12,9 +11,8 @@ import { MENU_ACTION } from '../../utils/constants';
 
 import styles from './styles';
 
-const CreateHomeScreen = ({ navigation }) => {
+const JoinHomeScreen = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [name, setName] = useState('');
   const [joinCode, setJoinCode] = useState('');
   const dispatch = useDispatch();
 
@@ -35,15 +33,8 @@ const CreateHomeScreen = ({ navigation }) => {
 
     try {
       const homeService = new HomeService();
-      await homeService.createHome(name, joinCode, dispatch);
+      await homeService.joinHome(joinCode, dispatch);
       navigation.navigate('HomeMain');
-      Clipboard.setString(joinCode);
-      dispatch(
-        showAlert(
-          'Join Code',
-          'Your join code has been copied to the clipboard.'
-        )
-      );
     } catch (error) {
       dispatch(showAlert('Oops!', error.message));
     }
@@ -52,16 +43,8 @@ const CreateHomeScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Header title="Create Home" leftAction={MENU_ACTION} />
+      <Header title="Join Home" leftAction={MENU_ACTION} />
       <View style={styles.form}>
-        <Input
-          placeholder="Home Name"
-          value={name}
-          onChangeText={setName}
-          autoCapitalize="words"
-          autoCorrect={false}
-          style={styles.input}
-        />
         <Input
           placeholder="Join Code"
           value={joinCode}
@@ -70,19 +53,16 @@ const CreateHomeScreen = ({ navigation }) => {
           autoCorrect={false}
           style={styles.input}
         />
-        <Text category="c2" appearance="hint">
-          Send your custom join code to anyone you would like to join your home.
-        </Text>
         <Button
           accessoryLeft={renderLoading}
           style={styles.submitButton}
           onPress={onSubmit}
         >
-          {!isLoading ? 'Create' : null}
+          {!isLoading ? 'Join' : null}
         </Button>
       </View>
     </View>
   );
 };
 
-export default CreateHomeScreen;
+export default JoinHomeScreen;

@@ -6,7 +6,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import Header from '../../components/general/header/header.component';
 
 import AuthService from '../../services/auth-service';
-import { MENU_ACTION } from '../../utils/constants'
+import HomeService from '../../services/home-service';
+import { MENU_ACTION } from '../../utils/constants';
 import styles from './styles';
 
 const ProfileScreen = ({ navigation }) => {
@@ -29,6 +30,9 @@ const ProfileScreen = ({ navigation }) => {
           onPress={() => {
             const authService = new AuthService();
             authService.signOut(dispatch);
+
+            const homeService = new HomeService();
+            homeService.clearHomeData(dispatch);
           }}
           style={styles.logOutButton}
         >

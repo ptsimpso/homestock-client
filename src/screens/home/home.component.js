@@ -13,11 +13,18 @@ const HomeScreen = ({ navigation }) => {
   const homes = useSelector((state) => state.homes);
   const dispatch = useDispatch();
 
-  renderTitle = () => {
-    return homes.selectedHome ? homes.selectedHome.name : 'Loading...';
-  }
+  const renderTitle = () => {
+    if (homes.selectedHome) {
+      return homes.selectedHome.name;
+    }
+    if (!homes.all) {
+      return 'Loading...';
+    }
 
-  renderContent = () => {
+    return 'Home';
+  };
+
+  const renderContent = () => {
     if (!homes.all) {
       return (
         <View style={styles.loadingContainer}>
@@ -25,11 +32,9 @@ const HomeScreen = ({ navigation }) => {
         </View>
       );
     } else {
-      return (
-        <Text>num homes: {homes.all.length}</Text>
-      );
+      return <Text>num homes: {homes.all.length}</Text>;
     }
-  }
+  };
 
   return (
     <View style={styles.container}>

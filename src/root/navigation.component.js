@@ -9,6 +9,7 @@ import LoginScreen from '../screens/login/login.component';
 import HomeScreen from '../screens/home/home.component';
 import ProfileScreen from '../screens/profile/profile.component';
 import CreateHomeScreen from '../screens/create-home/create-home.component';
+import JoinHomeScreen from '../screens/join-home/join-home.component';
 
 import SideMenu from '../components/general/side-menu/side-menu.component';
 
@@ -49,6 +50,7 @@ const MainNavigator = () => (
     <Drawer.Screen name="Profile" component={ProfileScreen} />
     <Drawer.Screen name="Home" component={HomeNavigator} />
     <Drawer.Screen name="CreateHome" component={CreateHomeScreen} />
+    <Drawer.Screen name="JoinHome" component={JoinHomeScreen} />
   </Drawer.Navigator>
 );
 

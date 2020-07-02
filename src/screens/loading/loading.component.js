@@ -19,7 +19,8 @@ const LoadingScreen = (props) => {
 
       if (isLoggedIn) {
         const homeService = new HomeService();
-        homeService.fetchHomes(dispatch);
+        await homeService.fetchHomes(dispatch);
+        await homeService.loadSelectedHomeFromStorage(dispatch);
       }
     }
 

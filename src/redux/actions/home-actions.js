@@ -3,6 +3,7 @@ import {
   SELECT_HOME,
   JOIN_HOME,
   UPDATE_HOME,
+  CLEAR_HOME_DATA,
 } from './types';
 
 export const setHomes = (homes) => {
@@ -30,5 +31,11 @@ export const updateHome = (home) => {
   return {
     type: UPDATE_HOME,
     payload: home,
+  };
+};
+
+export const clearHomeData = () => {
+  return {
+    type: CLEAR_HOME_DATA,
   };
 };
