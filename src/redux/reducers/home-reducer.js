@@ -4,6 +4,7 @@ import {
   JOIN_HOME,
   UPDATE_HOME,
   CLEAR_HOME_DATA,
+  LEAVE_HOME,
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -30,6 +31,7 @@ export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SET_HOMES:
       const homes = action.payload;
+
       let selectedHome;
 
       if (state.selectedHome) {
@@ -42,7 +44,7 @@ export default (state = INITIAL_STATE, action) => {
         }
       }
 
-      if (!selectedHome) {
+      if (!selectedHome && homes && homes.length > 0) {
         selectedHome = homes[0];
       }
       sortItems(selectedHome.items);
@@ -65,6 +67,17 @@ export default (state = INITIAL_STATE, action) => {
       return {
         all: state.all ? [...state.all, newHome] : [newHome],
         selectedHome: newHome,
+      };
+    case LEAVE_HOME:
+      const id = action.payload;
+      const homesLeft = state.all.filter((home) => {
+        return home._id !== id;
+      });
+
+      return {
+        all: homesLeft,
+        selectedHome:
+          homesLeft && homesLeft.length > 0 ? homesLeft[0] : undefined,
       };
     case UPDATE_HOME:
       const updatedHome = action.payload;

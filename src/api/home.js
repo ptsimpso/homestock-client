@@ -42,8 +42,19 @@ const fetchHomes = async () => {
   }
 };
 
+const leaveHome = async (id) => {
+  const base = createBase();
+
+  try {
+    await base.post(`/homes/${id}/leave`);
+  } catch (error) {
+    handleError(error);
+  }
+};
+
 export default {
   createHome,
   joinHome,
   fetchHomes,
+  leaveHome,
 };

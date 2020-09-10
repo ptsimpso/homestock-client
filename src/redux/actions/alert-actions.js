@@ -10,7 +10,7 @@ export const showAlert = (
   return {
     type: SET_ALERT,
     payload: {
-      isVisible: true, 
+      isVisible: true,
       title,
       text,
       actionText,

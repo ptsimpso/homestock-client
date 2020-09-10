@@ -5,3 +5,4 @@ export const SELECT_HOME = 'SELECT_HOME';
 export const JOIN_HOME = 'JOIN_HOME';
 export const UPDATE_HOME = 'UPDATE_HOME';
 export const CLEAR_HOME_DATA = 'CLEAR_HOME_DATA';
+export const LEAVE_HOME = 'LEAVE_HOME';

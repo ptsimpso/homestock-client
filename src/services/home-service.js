@@ -8,6 +8,7 @@ import {
   selectHome,
   updateHome,
   clearHomeData,
+  leaveHome,
 } from '../redux/actions';
 import store from '../redux/store';
 
@@ -37,6 +38,15 @@ class HomeService {
     const home = await homeApi.joinHome(joinCode);
     dispatch(joinHome(home));
     this.saveSelectedHome(home._id);
+  };
+
+  leaveHome = async (id, dispatch) => {
+    if (!id || id === '') {
+      throw new Error('Please provide a home ID.');
+    }
+
+    await homeApi.leaveHome(id);
+    dispatch(leaveHome(id));
   };
 
   selectHome = async (home, dispatch) => {

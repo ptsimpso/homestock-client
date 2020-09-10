@@ -4,16 +4,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Spinner, Button } from '@ui-kitten/components';
 
 import Header from '../../components/general/header/header.component';
-import { MENU_ACTION } from '../../utils/constants';
+import { MENU_ACTION, MORE_ACTION } from '../../utils/constants';
 import ItemList from './item-list/item-list.component';
-
+import MoreMenu from './more-menu/more-menu.component';
 import HomeService from '../../services/home-service';
+import { showAlert } from '../../redux/actions';
 
 import styles from './styles';
 
 const HomeScreen = ({ navigation }) => {
   const homes = useSelector((state) => state.homes);
   const [refreshing, setRefreshing] = useState(false);
+  const [menuVisible, setMenuVisible] = useState(false);
   const dispatch = useDispatch();
 
   const onRefresh = async () => {
@@ -22,6 +24,35 @@ const HomeScreen = ({ navigation }) => {
     const homeService = new HomeService();
     await homeService.fetchHomes(dispatch);
     setRefreshing(false);
+  };
+
+  const onMoreAction = () => {
+    setMenuVisible(true);
+  };
+
+  const onMenuDismiss = () => {
+    setMenuVisible(false);
+  };
+
+  const onAddItem = () => {
+    onMenuDismiss();
+    // TODO
+  };
+
+  const onLeaveHome = () => {
+    onMenuDismiss();
+    dispatch(
+      showAlert(
+        undefined,
+        'Are you juse you want to leave this home?',
+        'Confirm',
+        true,
+        async () => {
+          const homeService = new HomeService();
+          homeService.leaveHome(homes.selectedHome._id, dispatch);
+        }
+      )
+    );
   };
 
   // RENDERING
@@ -74,10 +105,22 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Header title={renderTitle()} leftAction={MENU_ACTION} />
+      <Header
+        title={renderTitle()}
+        leftAction={MENU_ACTION}
+        rightAction={MORE_ACTION}
+        rightActionCallback={onMoreAction}
+      />
       <SafeAreaView style={styles.container}>
         <View style={styles.contentContainer}>{renderContent()}</View>
       </SafeAreaView>
+      <MoreMenu
+        onDismiss={onMenuDismiss}
+        isVisible={menuVisible}
+        onAddItem={onAddItem}
+        onLeaveHome={onLeaveHome}
+        joinCode={homes.selectedHome ? homes.selectedHome.joinCode : ''}
+      />
     </View>
   );
 };

@@ -4,6 +4,7 @@ import {
   JOIN_HOME,
   UPDATE_HOME,
   CLEAR_HOME_DATA,
+  LEAVE_HOME,
 } from './types';
 
 export const setHomes = (homes) => {
@@ -24,6 +25,13 @@ export const joinHome = (home) => {
   return {
     type: JOIN_HOME,
     payload: home,
+  };
+};
+
+export const leaveHome = (id) => {
+  return {
+    type: LEAVE_HOME,
+    payload: id,
   };
 };
 
