@@ -11,6 +11,21 @@ const INITIAL_STATE = {
   selectedHome: null,
 };
 
+const sortItems = (items) => {
+  return items.sort((a, b) => {
+    const aNeedsRestock = a.quantity <= a.restockThreshold;
+    const bNeedsRestock = b.quantity <= b.restockThreshold;
+
+    if (aNeedsRestock === bNeedsRestock) {
+      return a.name < b.name ? -1 : 1;
+    }
+    if (aNeedsRestock) {
+      return -1;
+    }
+    return 1;
+  });
+};
+
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SET_HOMES:
@@ -30,18 +45,22 @@ export default (state = INITIAL_STATE, action) => {
       if (!selectedHome) {
         selectedHome = homes[0];
       }
+      sortItems(selectedHome.items);
 
       return {
         all: homes,
         selectedHome,
       };
     case SELECT_HOME:
+      const home = action.payload;
+      sortItems(home.items);
       return {
         ...state,
-        selectedHome: action.payload,
+        selectedHome: home,
       };
     case JOIN_HOME:
       const newHome = action.payload;
+      sortItems(newHome.items);
 
       return {
         all: state.all ? [...state.all, newHome] : [newHome],
@@ -62,6 +81,7 @@ export default (state = INITIAL_STATE, action) => {
       if (newSelectedHome._id === updatedHome._id) {
         newSelectedHome = updatedHome;
       }
+      sortItems(newSelectedHome.items);
 
       return {
         all,

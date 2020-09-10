@@ -1,17 +1,30 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { View, SafeAreaView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { Text, Spinner } from '@ui-kitten/components';
+import { Spinner, Button } from '@ui-kitten/components';
 
 import Header from '../../components/general/header/header.component';
 import { MENU_ACTION } from '../../utils/constants';
-import HomeService from "../../services/home-service";
+import ItemList from './item-list/item-list.component';
+
+import HomeService from '../../services/home-service';
 
 import styles from './styles';
 
 const HomeScreen = ({ navigation }) => {
   const homes = useSelector((state) => state.homes);
+  const [refreshing, setRefreshing] = useState(false);
   const dispatch = useDispatch();
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+
+    const homeService = new HomeService();
+    await homeService.fetchHomes(dispatch);
+    setRefreshing(false);
+  };
+
+  // RENDERING
 
   const renderTitle = () => {
     if (homes.selectedHome) {
@@ -31,15 +44,40 @@ const HomeScreen = ({ navigation }) => {
           <Spinner size="medium" />
         </View>
       );
+    } else if (homes.all.length === 0) {
+      return (
+        <View style={styles.placeholderContainer}>
+          <Button
+            onPress={() => navigation.navigate('CreateHome')}
+            style={styles.placeholderButton}
+          >
+            Create Home
+          </Button>
+          <Button
+            onPress={() => navigation.navigate('JoinHome')}
+            style={styles.placeholderButton}
+          >
+            Join Home
+          </Button>
+        </View>
+      );
     } else {
-      return <Text>num homes: {homes.all.length}</Text>;
+      return (
+        <ItemList
+          items={homes.selectedHome.items}
+          refreshing={refreshing}
+          onRefresh={onRefresh}
+        />
+      );
     }
   };
 
   return (
     <View style={styles.container}>
       <Header title={renderTitle()} leftAction={MENU_ACTION} />
-      {renderContent()}
+      <SafeAreaView style={styles.container}>
+        <View style={styles.contentContainer}>{renderContent()}</View>
+      </SafeAreaView>
     </View>
   );
 };

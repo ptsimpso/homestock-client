@@ -8,6 +8,18 @@ export default StyleService.create({
   loadingContainer: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+  },
+  contentContainer: {
+    flex: 1,
+    paddingHorizontal: 20,
+  },
+  placeholderContainer: {
+    flex: 1,
+    paddingTop: 80,
+  },
+  placeholderButton: {
+    height: 50,
+    marginTop: 50,
+  },
 });

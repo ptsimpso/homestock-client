@@ -31,7 +31,12 @@ const LoginScreen = ({ navigation }) => {
       const homeService = new HomeService();
       homeService.fetchHomes(dispatch);
     } catch (error) {
-      dispatch(showAlert('Oops!', 'Something went wrong fetching your homes. Please close the app and try again.'));
+      dispatch(
+        showAlert(
+          'Oops!',
+          'Something went wrong fetching your homes. Please close the app and try again.'
+        )
+      );
     }
 
     setIsLoading(false);

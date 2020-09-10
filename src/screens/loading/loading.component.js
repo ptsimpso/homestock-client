@@ -22,9 +22,9 @@ const LoadingScreen = (props) => {
         await homeService.fetchHomes(dispatch);
         await homeService.loadSelectedHomeFromStorage(dispatch);
       }
-    }
+    };
 
-    performInitialLaunchPrep()
+    performInitialLaunchPrep();
   }, [dispatch]);
 
   return (
