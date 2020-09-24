@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, FlatList, Image, RefreshControl } from 'react-native';
+import { View, FlatList, Image, TouchableOpacity } from 'react-native';
 import { Text, Divider, useStyleSheet } from '@ui-kitten/components';
 
 import stylesheet from './styles';
 
-const ItemList = ({ items, refreshing, onRefresh }) => {
+const ItemList = ({ items, refreshing, onRefresh, onItemPress }) => {
   const styles = useStyleSheet(stylesheet);
 
   const renderImage = (image) => {
@@ -25,7 +25,10 @@ const ItemList = ({ items, refreshing, onRefresh }) => {
 
   const renderItem = ({ item }) => {
     return (
-      <View style={styles.itemContainer}>
+      <TouchableOpacity
+        style={styles.itemContainer}
+        onPress={() => onItemPress(item)}
+      >
         {renderImage(item.img)}
         <Text style={styles.title} category="h6">
           {item.name}
@@ -34,7 +37,7 @@ const ItemList = ({ items, refreshing, onRefresh }) => {
           {item.quantity}
         </Text>
         {renderRestockIndicator(item)}
-      </View>
+      </TouchableOpacity>
     );
   };
 

@@ -10,6 +10,7 @@ import HomeScreen from '../screens/home/home.component';
 import ProfileScreen from '../screens/profile/profile.component';
 import CreateHomeScreen from '../screens/create-home/create-home.component';
 import JoinHomeScreen from '../screens/join-home/join-home.component';
+import ItemScreen from '../screens/item/item.component';
 
 import SideMenu from '../components/general/side-menu/side-menu.component';
 
@@ -61,6 +62,7 @@ const HomeStack = createStackNavigator();
 const HomeNavigator = () => (
   <HomeStack.Navigator headerMode="none">
     <HomeStack.Screen name="HomeMain" component={HomeScreen} />
+    <HomeStack.Screen name="Item" component={ItemScreen} />
   </HomeStack.Navigator>
 );
 

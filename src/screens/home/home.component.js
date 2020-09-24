@@ -18,6 +18,8 @@ const HomeScreen = ({ navigation }) => {
   const [menuVisible, setMenuVisible] = useState(false);
   const dispatch = useDispatch();
 
+  // ACTIONS
+
   const onRefresh = async () => {
     setRefreshing(true);
 
@@ -36,7 +38,7 @@ const HomeScreen = ({ navigation }) => {
 
   const onAddItem = () => {
     onMenuDismiss();
-    // TODO
+    navigation.navigate('Item');
   };
 
   const onLeaveHome = () => {
@@ -53,6 +55,10 @@ const HomeScreen = ({ navigation }) => {
         }
       )
     );
+  };
+
+  const onItemPress = (item) => {
+    navigation.navigate('Item', { item });
   };
 
   // RENDERING
@@ -98,6 +104,7 @@ const HomeScreen = ({ navigation }) => {
           items={homes.selectedHome.items}
           refreshing={refreshing}
           onRefresh={onRefresh}
+          onItemPress={onItemPress}
         />
       );
     }
