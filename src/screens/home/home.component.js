@@ -38,7 +38,7 @@ const HomeScreen = ({ navigation }) => {
 
   const onAddItem = () => {
     onMenuDismiss();
-    navigation.navigate('Item');
+    navigation.navigate('Item', { homeId: homes.selectedHome._id });
   };
 
   const onLeaveHome = () => {
@@ -110,12 +110,14 @@ const HomeScreen = ({ navigation }) => {
     }
   };
 
+  const rightAction = homes.selectedHome ? MORE_ACTION : null;
+
   return (
     <View style={styles.container}>
       <Header
         title={renderTitle()}
         leftAction={MENU_ACTION}
-        rightAction={MORE_ACTION}
+        rightAction={rightAction}
         rightActionCallback={onMoreAction}
       />
       <SafeAreaView style={styles.container}>
