@@ -1,3 +1,5 @@
+import FormData from 'form-data';
+
 import createBase from './helpers/createBase';
 import handleError from './helpers/handleError';
 
@@ -34,6 +36,24 @@ const editItem = async (itemId, name, quantity, restockThreshold) => {
   }
 };
 
+const saveItemImage = async (itemId, uri, fileName) => {
+  const base = createBase();
+  base.defaults.headers.post['Content-Type'] = 'multipart/form-data';
+  base.defaults.headers.post.Accept = 'application/json';
+
+  const data = new FormData();
+  data.append('img', {
+    name: fileName,
+    uri,
+  });
+
+  try {
+    await base.post(`/items/${itemId}/image`, data);
+  } catch (error) {
+    handleError(error);
+  }
+};
+
 const deleteItem = async (itemId) => {
   const base = createBase();
 
@@ -48,4 +68,5 @@ export default {
   createItem,
   editItem,
   deleteItem,
+  saveItemImage,
 };

@@ -1,3 +1,5 @@
+import { Platform } from 'react-native';
+
 import itemApi from '../api/item';
 
 class ItemService {
@@ -28,6 +30,20 @@ class ItemService {
 
     const item = await itemApi.editItem(itemId, name, quantityNum, restockNum);
     return item;
+  };
+
+  saveItemImage = async (itemId, imgData) => {
+    if (!itemId || !imgData || !imgData.uri || !imgData.type) {
+      throw new Error('Failed to upload image.');
+    }
+
+    const formattedUri =
+      Platform.OS === 'android'
+        ? imgData.uri
+        : imgData.uri.replace('file://', '');
+
+    const fileName = `image.${imgData.type.replace('image/', '')}`;
+    await itemApi.saveItemImage(itemId, formattedUri, fileName);
   };
 
   deleteItem = async (itemId) => {

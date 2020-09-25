@@ -23,7 +23,7 @@ export default StyleService.create({
   image: {
     height: '100%',
     width: '100%',
-    resizeMode: 'contain',
+    resizeMode: 'cover',
   },
   imagePlaceholder: {
     textAlign: 'center',

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, SafeAreaView, Image, TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { Input, Button, Spinner, Text } from '@ui-kitten/components';
+import ImagePicker from 'react-native-image-picker';
 
 import Header from '../../components/general/header/header.component';
 import { BACK_ACTION } from '../../utils/constants';
@@ -32,6 +33,35 @@ const ItemScreen = ({ navigation, route }) => {
 
   // FUNCTIONS
 
+  const onImagePress = () => {
+    const options = {
+      title: 'Select Image',
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+
+    ImagePicker.showImagePicker(options, (response) => {
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else {
+        const { uri, type } = response;
+        console.log('==*==*==*==*==*==*==*')
+        console.log('==*==*==*==*==*==*==*')
+        console.log(response.fileSize)
+        console.log('==*==*==*==*==*==*==*')
+        console.log('==*==*==*==*==*==*==*')
+        setImgData({
+          uri,
+          type,
+        });
+      }
+    });
+  };
+
   const onSubmit = async () => {
     setIsLoading(true);
     const itemService = new ItemService();
@@ -46,7 +76,9 @@ const ItemScreen = ({ navigation, route }) => {
         // Adding new item
         newItem = await itemService.createItem(homeId, name, quantity, restock);
       }
-      // TODO: Save image if needed
+      if (imgData) {
+        await itemService.saveItemImage(newItem._id, imgData);
+      }
       await homeService.fetchHomes(dispatch);
       navigation.goBack();
     } catch (error) {
@@ -86,7 +118,10 @@ const ItemScreen = ({ navigation, route }) => {
   const renderImage = () => {
     if (imgData || item.img) {
       return (
-        <Image style={styles.image} source={{ uri: imgData || item.img }} />
+        <Image
+          style={styles.image}
+          source={{ uri: imgData ? imgData.uri : item.img }}
+        />
       );
     } else {
       return <Text style={styles.imagePlaceholder}>Add{'\n'}Image</Text>;
@@ -99,7 +134,7 @@ const ItemScreen = ({ navigation, route }) => {
         <Spinner size="small" status="control" />
       </View>
     );
-  }
+  };
 
   const renderLoading = (props) => {
     if (isLoading) {
@@ -140,7 +175,7 @@ const ItemScreen = ({ navigation, route }) => {
   const renderContent = () => {
     return (
       <>
-        <TouchableOpacity style={styles.imageContainer}>
+        <TouchableOpacity style={styles.imageContainer} onPress={onImagePress}>
           {renderImage()}
         </TouchableOpacity>
         <Input

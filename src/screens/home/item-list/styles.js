@@ -9,7 +9,7 @@ export default StyleService.create({
   image: {
     height: 50,
     width: 50,
-    resizeMode: 'contain',
+    resizeMode: 'cover',
     marginRight: 15,
     borderRadius: 4,
   },
