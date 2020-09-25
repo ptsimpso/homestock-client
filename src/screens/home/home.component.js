@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, SafeAreaView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { Spinner, Button } from '@ui-kitten/components';
+import { Spinner, Button, Text } from '@ui-kitten/components';
 
 import Header from '../../components/general/header/header.component';
 import { MENU_ACTION, MORE_ACTION } from '../../utils/constants';
@@ -46,7 +46,7 @@ const HomeScreen = ({ navigation }) => {
     dispatch(
       showAlert(
         undefined,
-        'Are you juse you want to leave this home?',
+        'Are you sure you want\nto leave this home?',
         'Confirm',
         true,
         async () => {
@@ -74,6 +74,34 @@ const HomeScreen = ({ navigation }) => {
     return 'Home';
   };
 
+  const renderItemContent = () => {
+    const {
+      selectedHome: { items },
+    } = homes;
+
+    if (items.length === 0) {
+      return (
+        <View style={styles.noItemContainer}>
+          <Text style={styles.noItemText} category="h5" appearance="hint">
+            Nothing here yet!
+          </Text>
+          <Button onPress={onAddItem} style={styles.placeholderButton}>
+            Add Item
+          </Button>
+        </View>
+      );
+    } else {
+      return (
+        <ItemList
+          items={items}
+          refreshing={refreshing}
+          onRefresh={onRefresh}
+          onItemPress={onItemPress}
+        />
+      );
+    }
+  };
+
   const renderContent = () => {
     if (!homes.all) {
       return (
@@ -99,14 +127,7 @@ const HomeScreen = ({ navigation }) => {
         </View>
       );
     } else {
-      return (
-        <ItemList
-          items={homes.selectedHome.items}
-          refreshing={refreshing}
-          onRefresh={onRefresh}
-          onItemPress={onItemPress}
-        />
-      );
+      return renderItemContent();
     }
   };
 

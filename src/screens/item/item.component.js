@@ -22,7 +22,7 @@ const ItemScreen = ({ navigation, route }) => {
   const [isDeleteLoading, setIsDeleteLoading] = useState(false);
   const [name, setName] = useState(item.name);
   const [restock, setRestock] = useState(
-    item.restock ? item.restock.toString() : ''
+    item.restockThreshold ? item.restockThreshold.toString() : ''
   );
   const [quantity, setQuantity] = useState(
     item.quantity ? item.quantity.toString() : ''
@@ -49,11 +49,6 @@ const ItemScreen = ({ navigation, route }) => {
         console.log('ImagePicker Error: ', response.error);
       } else {
         const { uri, type } = response;
-        console.log('==*==*==*==*==*==*==*')
-        console.log('==*==*==*==*==*==*==*')
-        console.log(response.fileSize)
-        console.log('==*==*==*==*==*==*==*')
-        console.log('==*==*==*==*==*==*==*')
         setImgData({
           uri,
           type,

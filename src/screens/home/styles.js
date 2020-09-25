@@ -22,4 +22,11 @@ export default StyleService.create({
     height: 50,
     marginTop: 50,
   },
+  noItemContainer: {
+    padding: 30,
+  },
+  noItemText: {
+    textAlign: 'center',
+    marginTop: 50,
+  },
 });
