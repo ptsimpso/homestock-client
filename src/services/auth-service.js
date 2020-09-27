@@ -36,6 +36,14 @@ class AuthService {
     AsyncStorage.removeItem(STORED_USER_KEY);
   };
 
+  sendForgotPass = async (email) => {
+    if (!isEmail(email)) {
+      throw new Error('Please provide a valid email.');
+    }
+
+    await authApi.resetPassword(email.trim());
+  };
+
   loadUserFromStorage = async (dispatch) => {
     const json = await AsyncStorage.getItem(STORED_USER_KEY);
     let isLoggedIn;

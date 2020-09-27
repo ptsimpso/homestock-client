@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
-import { Input, Button, Spinner } from '@ui-kitten/components';
+import { View, TouchableOpacity } from 'react-native';
+import { Input, Button, Spinner, Text } from '@ui-kitten/components';
 
 import styles from './styles';
 
-const AuthForm = ({ isLoading, showNameField, submitTitle, onSubmit }) => {
+const AuthForm = ({
+  isLoading,
+  showNameField,
+  submitTitle,
+  onSubmit,
+  showForgotPass,
+  onForgotPass,
+}) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -25,6 +32,20 @@ const AuthForm = ({ isLoading, showNameField, submitTitle, onSubmit }) => {
       return null;
     }
   };
+
+  const renderForgotPass = () => {
+    if (showForgotPass) {
+      return (
+        <TouchableOpacity onPress={() => onForgotPass(email)}>
+          <Text style={styles.forgotPass} category="label" appearance="hint">
+            Forgot password?
+          </Text>
+        </TouchableOpacity>
+      );
+    }
+
+    return null;
+  }
 
   const renderLoading = (props) => {
     if (isLoading) {
@@ -59,6 +80,7 @@ const AuthForm = ({ isLoading, showNameField, submitTitle, onSubmit }) => {
         secureTextEntry
         style={styles.input}
       />
+      {renderForgotPass()}
       <Button
         onPress={() => onSubmit({ name, email, password })}
         accessoryLeft={renderLoading}

@@ -44,6 +44,21 @@ const LoginScreen = ({ navigation }) => {
 
   const onSignUpPressed = () => navigation.goBack();
 
+  const onForgotPass = async (email) => {
+    try {
+      const authService = new AuthService();
+      await authService.sendForgotPass(email);
+      dispatch(
+        showAlert(
+          'Email Sent',
+          'You will recieve an email shortly with new login credentials.'
+        )
+      );
+    } catch (error) {
+      dispatch(showAlert('Oops!', error.message));
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAwareScrollView keyboardShouldPersistTaps="handled">
@@ -52,6 +67,8 @@ const LoginScreen = ({ navigation }) => {
           isLoading={isLoading}
           submitTitle="Sign In"
           onSubmit={onSignInPressed}
+          showForgotPass={true}
+          onForgotPass={onForgotPass}
         />
         <TouchableOpacity onPress={onSignUpPressed}>
           <Text category="p1" appearance="hint" style={styles.loginText}>

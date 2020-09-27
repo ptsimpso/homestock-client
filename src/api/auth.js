@@ -42,8 +42,21 @@ const signOut = async () => {
   }
 };
 
+const resetPassword = async (email) => {
+  const base = createBase();
+
+  try {
+    await base.post('/auth/reset', {
+      email,
+    });
+  } catch (error) {
+    handleError(error);
+  }
+};
+
 export default {
   signUp,
   signIn,
   signOut,
+  resetPassword,
 };

@@ -7,6 +7,10 @@ export default StyleSheet.create({
   input: {
     marginBottom: 10,
   },
+  forgotPass: {
+    textAlign: 'right',
+    marginBottom: 15,
+  },
   loading: {
     justifyContent: 'center',
     alignItems: 'center',
