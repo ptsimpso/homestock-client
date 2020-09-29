@@ -1,4 +1,4 @@
-export const DEV_MODE = true;
+export const DEV_MODE = false;
 
 // Keys
 export const STORED_USER_KEY = 'STORED_USER_KEY';
