@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { Button, Card, Modal, Text, Input } from '@ui-kitten/components';
+import React, { useState, useRef, useEffect } from 'react';
+import { TouchableWithoutFeedback, View, Animated } from 'react-native';
+import { Button, Card, Text, Input } from '@ui-kitten/components';
 import { useDispatch } from 'react-redux';
 
 import { dismissAlert } from '../../../redux/actions';
@@ -12,7 +13,6 @@ const onDismiss = (dispatch) => {
 
 const Alert = ({
   alert: {
-    isVisible,
     title,
     text,
     inputData,
@@ -22,13 +22,34 @@ const Alert = ({
   },
 }) => {
   const [inputValue, setInputValue] = useState('');
-
   const dispatch = useDispatch();
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+
+  // LIFECYCLE
+
+  useEffect(() => {
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 100,
+      useNativeDriver: true,
+    }).start();
+  }, [fadeAnim]);
+
+  // ACTIONS
 
   const dismiss = () => {
     setInputValue('');
-    onDismiss(dispatch);
+
+    Animated.timing(fadeAnim, {
+      toValue: 0,
+      duration: 100,
+      useNativeDriver: true,
+    }).start(() => {
+      onDismiss(dispatch);
+    });
   };
+
+  // RENDERING
 
   const renderInput = () => {
     if (inputData) {
@@ -50,14 +71,15 @@ const Alert = ({
   };
 
   return (
-    <Modal
-      visible={isVisible}
-      backdropStyle={styles.backdrop}
-      onBackdropPress={shouldBackgroundDismiss ? dismiss : () => {}}
-    >
+    <Animated.View style={{ ...styles.container, opacity: fadeAnim }}>
+      <TouchableWithoutFeedback
+        onPress={shouldBackgroundDismiss ? dismiss : () => { }}
+      >
+        <View style={styles.backdrop} />
+      </TouchableWithoutFeedback>
       <Card
         disabled={true}
-        style={[styles.container, inputData ? styles.offsetContainer : {}]}
+        style={[styles.modal, inputData ? styles.offsetModal : {}]}
       >
         {title ? (
           <Text category="s1" style={styles.title}>
@@ -68,16 +90,16 @@ const Alert = ({
         {renderInput()}
         <Button
           onPress={() => {
-            dismiss();
             if (onActionPress) {
               onActionPress(inputData ? inputValue : null);
             }
+            dismiss();
           }}
         >
           {actionText ? actionText : 'Ok'}
         </Button>
       </Card>
-    </Modal>
+    </Animated.View>
   );
 };
 

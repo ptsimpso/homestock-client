@@ -84,7 +84,7 @@ const ItemScreen = ({ navigation, route }) => {
 
   const onDelete = () => {
     dispatch(
-      showAlert('Are you sure?', null, 'Confirm', true, async () => {
+      showAlert('Are you sure?', null, null, 'Confirm', true, async () => {
         setIsDeleteLoading(true);
         const itemService = new ItemService();
         const homeService = new HomeService();

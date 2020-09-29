@@ -22,9 +22,9 @@ const ProfileScreen = ({ navigation }) => {
       setIsPassLoading(true);
       const authService = new AuthService();
       await authService.updateUser(auth.token, { password }, dispatch);
-      dispatch(showAlert('Success', 'Password updated.', null, 'Ok'));
+      dispatch(showAlert('Success', 'Password updated.'));
     } catch (error) {
-      dispatch(showAlert('Oops!', error.message, null, 'Ok'));
+      dispatch(showAlert('Oops!', error.message));
     }
     setIsPassLoading(false);
   };

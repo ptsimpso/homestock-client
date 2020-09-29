@@ -47,6 +47,7 @@ const HomeScreen = ({ navigation }) => {
       showAlert(
         undefined,
         'Are you sure you want\nto leave this home?',
+        null,
         'Confirm',
         true,
         async () => {
@@ -144,13 +145,14 @@ const HomeScreen = ({ navigation }) => {
       <SafeAreaView style={styles.container}>
         <View style={styles.contentContainer}>{renderContent()}</View>
       </SafeAreaView>
-      <MoreMenu
-        onDismiss={onMenuDismiss}
-        isVisible={menuVisible}
-        onAddItem={onAddItem}
-        onLeaveHome={onLeaveHome}
-        joinCode={homes.selectedHome ? homes.selectedHome.joinCode : ''}
-      />
+      {menuVisible && (
+        <MoreMenu
+          onDismiss={onMenuDismiss}
+          onAddItem={onAddItem}
+          onLeaveHome={onLeaveHome}
+          joinCode={homes.selectedHome ? homes.selectedHome.joinCode : ''}
+        />
+      )}
     </View>
   );
 };

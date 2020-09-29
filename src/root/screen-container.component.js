@@ -11,7 +11,7 @@ export const AppNavigator = () => {
   return (
     <NavigationContainer>
       <NavigationStack />
-      <Alert alert={alert} />
+      {alert.isVisible && <Alert alert={alert} />}
     </NavigationContainer>
   );
 };
