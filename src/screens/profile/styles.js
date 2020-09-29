@@ -12,7 +12,10 @@ export default StyleSheet.create({
     marginTop: 20,
     marginBottom: 2,
   },
-  logOutButton: {
+  updatePassButton: {
     marginTop: 30,
+  },
+  logOutButton: {
+    marginTop: 15,
   },
 });

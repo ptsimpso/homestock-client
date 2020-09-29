@@ -54,9 +54,21 @@ const resetPassword = async (email) => {
   }
 };
 
+const updateUser = async (updates) => {
+  const base = createBase();
+
+  try {
+    const { data } = await base.patch('/auth/me', updates);
+    return data;
+  } catch (error) {
+    handleError(error);
+  }
+};
+
 export default {
   signUp,
   signIn,
   signOut,
   resetPassword,
+  updateUser,
 };

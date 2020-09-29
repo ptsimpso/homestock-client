@@ -23,23 +23,12 @@ const LoginScreen = ({ navigation }) => {
     try {
       const authService = new AuthService();
       await authService.signIn(email, password, dispatch);
+      const homeService = new HomeService();
+      await homeService.fetchHomes(dispatch);
     } catch (error) {
       dispatch(showAlert('Oops!', error.message));
+      setIsLoading(false);
     }
-
-    try {
-      const homeService = new HomeService();
-      homeService.fetchHomes(dispatch);
-    } catch (error) {
-      dispatch(
-        showAlert(
-          'Oops!',
-          'Something went wrong fetching your homes. Please close the app and try again.'
-        )
-      );
-    }
-
-    setIsLoading(false);
   };
 
   const onSignUpPressed = () => navigation.goBack();

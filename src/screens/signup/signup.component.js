@@ -24,8 +24,8 @@ const SignUpScreen = ({ navigation }) => {
       await authService.signUp(name, email, password, dispatch);
     } catch (error) {
       dispatch(showAlert('Oops!', error.message));
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   const onLoginPressed = () => navigation.navigate('Login');

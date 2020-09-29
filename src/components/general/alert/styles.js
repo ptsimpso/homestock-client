@@ -9,6 +9,10 @@ export default StyleSheet.create({
     marginRight: 20,
     minWidth: 250,
   },
+  offsetContainer: {
+    position: 'relative',
+    top: -100,
+  },
   title: {
     fontSize: 16,
     textAlign: 'center',

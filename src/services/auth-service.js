@@ -44,6 +44,11 @@ class AuthService {
     await authApi.resetPassword(email.trim());
   };
 
+  updateUser = async (authToken, updates, dispatch) => {
+    const data = await authApi.updateUser(updates);
+    this.setUser({ user: data, token: authToken }, dispatch);
+  };
+
   loadUserFromStorage = async (dispatch) => {
     const json = await AsyncStorage.getItem(STORED_USER_KEY);
     let isLoggedIn;

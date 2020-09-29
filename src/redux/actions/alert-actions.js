@@ -3,6 +3,7 @@ import { SET_ALERT } from './types';
 export const showAlert = (
   title,
   text,
+  inputData,
   actionText,
   shouldBackgroundDismiss = true,
   onActionPress
@@ -13,6 +14,7 @@ export const showAlert = (
       isVisible: true,
       title,
       text,
+      inputData,
       actionText,
       shouldBackgroundDismiss,
       onActionPress,
