@@ -47,7 +47,10 @@ export default (state = INITIAL_STATE, action) => {
       if (!selectedHome && homes && homes.length > 0) {
         selectedHome = homes[0];
       }
-      sortItems(selectedHome.items);
+
+      if (selectedHome) {
+        sortItems(selectedHome.items);
+      }
 
       return {
         all: homes,

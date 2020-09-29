@@ -72,15 +72,13 @@ const HomeScreen = ({ navigation }) => {
       return 'Loading...';
     }
 
-    return 'Home';
+    return 'Welcome!';
   };
 
   const renderItemContent = () => {
-    const {
-      selectedHome: { items },
-    } = homes;
+    const { selectedHome } = homes;
 
-    if (items.length === 0) {
+    if (selectedHome && selectedHome.items.length === 0) {
       return (
         <View style={styles.noItemContainer}>
           <Text style={styles.noItemText} category="h5" appearance="hint">
@@ -94,7 +92,7 @@ const HomeScreen = ({ navigation }) => {
     } else {
       return (
         <ItemList
-          items={items}
+          items={selectedHome.items}
           refreshing={refreshing}
           onRefresh={onRefresh}
           onItemPress={onItemPress}

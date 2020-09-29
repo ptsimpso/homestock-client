@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import isEmail from 'validator/lib/isEmail';
 
 import authApi from '../api/auth';
-import { setCurrentUser, clearCurrentUser } from '../redux/actions';
+import { setCurrentUser, clearCurrentUser, setHomes } from '../redux/actions';
 import { STORED_USER_KEY } from '../utils/constants';
 
 class AuthService {
@@ -23,6 +23,7 @@ class AuthService {
       password.trim()
     );
     this.setUser(data, dispatch);
+    dispatch(setHomes([]));
   };
 
   signIn = async (email, password, dispatch) => {

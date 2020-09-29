@@ -16,7 +16,6 @@ export default StyleService.create({
   },
   placeholderContainer: {
     flex: 1,
-    paddingTop: 80,
   },
   placeholderButton: {
     height: 50,
