@@ -9,7 +9,7 @@ export default StyleSheet.create({
     padding: 20,
   },
   input: {
-    marginBottom: 10,
+    marginBottom: 20,
   },
   loading: {
     justifyContent: 'center',
@@ -17,7 +17,6 @@ export default StyleSheet.create({
   },
   submitButton: {
     height: 50,
-    marginTop: 30,
     justifyContent: 'center',
     alignItems: 'center',
   },
