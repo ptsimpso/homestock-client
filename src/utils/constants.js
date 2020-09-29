@@ -8,4 +8,3 @@ export const STORED_SELECTED_HOME_KEY = 'STORED_SELECTED_HOME_KEY';
 export const MENU_ACTION = 'MENU_ACTION';
 export const BACK_ACTION = 'BACK_ACTION';
 export const MORE_ACTION = 'MORE_ACTION';
-
