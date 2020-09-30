@@ -3,6 +3,7 @@ import { View, SafeAreaView, Image, TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { Input, Button, Spinner, Text } from '@ui-kitten/components';
 import ImagePicker from 'react-native-image-picker';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import Header from '../../components/general/header/header.component';
 import { BACK_ACTION } from '../../utils/constants';
@@ -169,7 +170,7 @@ const ItemScreen = ({ navigation, route }) => {
 
   const renderContent = () => {
     return (
-      <>
+      <KeyboardAwareScrollView>
         <TouchableOpacity style={styles.imageContainer} onPress={onImagePress}>
           {renderImage()}
         </TouchableOpacity>
@@ -204,7 +205,7 @@ const ItemScreen = ({ navigation, route }) => {
           {!isLoading && submitTitle}
         </Button>
         {renderDeleteButton()}
-      </>
+      </KeyboardAwareScrollView>
     );
   };
 
