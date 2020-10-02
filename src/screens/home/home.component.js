@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, SafeAreaView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { Spinner, Button, Text } from '@ui-kitten/components';
+import { Spinner, Button, Text, Input, Icon } from '@ui-kitten/components';
 
 import Header from '../../components/general/header/header.component';
 import { MENU_ACTION, MORE_ACTION } from '../../utils/constants';
@@ -16,6 +16,7 @@ const HomeScreen = ({ navigation }) => {
   const homes = useSelector((state) => state.homes);
   const [refreshing, setRefreshing] = useState(false);
   const [menuVisible, setMenuVisible] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
   const dispatch = useDispatch();
 
   // ACTIONS
@@ -90,13 +91,26 @@ const HomeScreen = ({ navigation }) => {
         </View>
       );
     } else {
+
+      const renderSearchIcon = (props) => {
+        return <Icon {...props} name="search-outline" />;
+      };
+
       return (
-        <ItemList
-          items={selectedHome.items}
-          refreshing={refreshing}
-          onRefresh={onRefresh}
-          onItemPress={onItemPress}
-        />
+        <>
+          <Input
+            value={searchValue}
+            onChangeText={setSearchValue}
+            accessoryLeft={renderSearchIcon}
+            style={styles.searchInput}
+          />
+          <ItemList
+            items={selectedHome.items}
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            onItemPress={onItemPress}
+          />
+        </>
       );
     }
   };

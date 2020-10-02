@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, FlatList, Image, TouchableOpacity } from 'react-native';
+import { View, Image, TouchableOpacity } from 'react-native';
 import { Text, Divider, useStyleSheet } from '@ui-kitten/components';
+import { KeyboardAwareFlatList } from 'react-native-keyboard-aware-scroll-view'
 
 import stylesheet from './styles';
 
@@ -42,13 +43,14 @@ const ItemList = ({ items, refreshing, onRefresh, onItemPress }) => {
   };
 
   return (
-    <FlatList
+    <KeyboardAwareFlatList
       data={items}
       renderItem={renderItem}
       keyExtractor={(item) => item._id}
       ItemSeparatorComponent={() => <Divider />}
       onRefresh={onRefresh}
       refreshing={refreshing}
+      showsVerticalScrollIndicator={false}
     />
   );
 };

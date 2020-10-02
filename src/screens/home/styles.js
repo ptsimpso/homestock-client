@@ -28,4 +28,7 @@ export default StyleService.create({
     textAlign: 'center',
     marginTop: 50,
   },
+  searchInput: {
+    marginTop: 10,
+  },
 });
