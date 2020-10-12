@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Image, TouchableOpacity } from 'react-native';
 import { Text, Divider, useStyleSheet } from '@ui-kitten/components';
-import { KeyboardAwareFlatList } from 'react-native-keyboard-aware-scroll-view'
+import { KeyboardAwareFlatList } from 'react-native-keyboard-aware-scroll-view';
 
 import stylesheet from './styles';
 
