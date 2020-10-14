@@ -44,6 +44,7 @@ const ItemList = ({ items, refreshing, onRefresh, onItemPress }) => {
 
   return (
     <KeyboardAwareFlatList
+      keyboardShouldPersistTaps="handled"
       data={items}
       renderItem={renderItem}
       keyExtractor={(item) => item._id}

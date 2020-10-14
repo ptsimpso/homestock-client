@@ -14,7 +14,6 @@ import { showAlert } from '../../redux/actions';
 import styles from './styles';
 
 const ItemScreen = ({ navigation, route }) => {
-
   // Nav params
   const { item = {}, homeId } = route.params || {};
 

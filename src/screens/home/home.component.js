@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, SafeAreaView } from 'react-native';
+import { View, SafeAreaView, TouchableWithoutFeedback } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Spinner, Button, Text, Input, Icon } from '@ui-kitten/components';
 
@@ -96,16 +96,30 @@ const HomeScreen = ({ navigation }) => {
         return <Icon {...props} name="search-outline" />;
       };
 
+      const renderClearSearch = (props) => (
+        <TouchableWithoutFeedback onPress={() => setSearchValue('')}>
+          <Icon {...props} name="close-circle-outline" />
+        </TouchableWithoutFeedback>
+      );
+
+      let visibleItems = selectedHome.items;
+      if (searchValue !== '') {
+        visibleItems = selectedHome.items.filter((item) => {
+          return item.name.toLowerCase().includes(searchValue.toLowerCase());
+        });
+      }
+
       return (
         <>
           <Input
             value={searchValue}
             onChangeText={setSearchValue}
             accessoryLeft={renderSearchIcon}
+            accessoryRight={renderClearSearch}
             style={styles.searchInput}
           />
           <ItemList
-            items={selectedHome.items}
+            items={visibleItems}
             refreshing={refreshing}
             onRefresh={onRefresh}
             onItemPress={onItemPress}
