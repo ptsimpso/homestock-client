@@ -91,7 +91,6 @@ const HomeScreen = ({ navigation }) => {
         </View>
       );
     } else {
-
       const renderSearchIcon = (props) => {
         return <Icon {...props} name="search-outline" />;
       };

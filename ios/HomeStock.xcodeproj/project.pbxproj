@@ -59,6 +59,8 @@
 		2D02E47B1E0B4A5D006451C7 /* HomeStock-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HomeStock-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* HomeStock-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "HomeStock-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		32900A65A2F3C0EC542538A6 /* libPods-HomeStock-HomeStockTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HomeStock-HomeStockTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6566CEFB259C036D00204222 /* simulator_screenshot_4DE3CB42-29D9-49B8-A497-CFC51279865C.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "simulator_screenshot_4DE3CB42-29D9-49B8-A497-CFC51279865C.png"; path = "../../../../../../../var/folders/rg/zmlkqmd10px9vzcw2m2w0t_00000gn/T/simulator_screenshot_4DE3CB42-29D9-49B8-A497-CFC51279865C.png"; sourceTree = "<group>"; };
+		6566CEFC259C039900204222 /* simulator_screenshot_FEC659B6-F0F3-41B0-BCD2-1D9480E19DFB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "simulator_screenshot_FEC659B6-F0F3-41B0-BCD2-1D9480E19DFB.png"; path = "../../../../../../../var/folders/rg/zmlkqmd10px9vzcw2m2w0t_00000gn/T/simulator_screenshot_FEC659B6-F0F3-41B0-BCD2-1D9480E19DFB.png"; sourceTree = "<group>"; };
 		7F113B579B6F5A8909B29F04 /* libPods-HomeStock-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HomeStock-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AE9529CA35BD02803E3BEAC /* Pods-HomeStock-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeStock-tvOS.release.xcconfig"; path = "Target Support Files/Pods-HomeStock-tvOS/Pods-HomeStock-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		9B94C1FF786D5B1DCF710477 /* Pods-HomeStock-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeStock-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-HomeStock-tvOSTests/Pods-HomeStock-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -139,6 +141,8 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6566CEFC259C039900204222 /* simulator_screenshot_FEC659B6-F0F3-41B0-BCD2-1D9480E19DFB.png */,
+				6566CEFB259C036D00204222 /* simulator_screenshot_4DE3CB42-29D9-49B8-A497-CFC51279865C.png */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				009DBF1CDCEA475274202B12 /* libPods-HomeStock.a */,
@@ -667,7 +671,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = THRXCBM6EM;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -695,7 +699,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = THRXCBM6EM;
 				INFOPLIST_FILE = HomeStock/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
